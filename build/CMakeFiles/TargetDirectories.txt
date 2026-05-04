@@ -1,0 +1,3 @@
+/home/gigu/Projects/MicroNode/build/CMakeFiles/MicroNode.dir
+/home/gigu/Projects/MicroNode/build/CMakeFiles/edit_cache.dir
+/home/gigu/Projects/MicroNode/build/CMakeFiles/rebuild_cache.dir
