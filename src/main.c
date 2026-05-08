@@ -1,14 +1,22 @@
-#ifndef NETWORKING_H
-    #define NETWORKING_H
-#include <stdio.h>
-#include <string.h>
-#include <stdlib.h>
-#include <error.h>
+#ifndef INITIAL_H
+    #define INITIAL_H
+
+#include "networking.h"
 
 int main()
 {
-    printf("Hello, World!\n");
-    return EXIT_SUCCESS;
-}
+    ServerConfig Config;
+    Config.port = 8080;
+    int init_result = init_networking((ServerConfig *)&Config);
+    if (init_result == EXIT_FAILURE)
+        {
+            return EXIT_FAILURE;
+        }
 
+    while(1)
+        {
+            int result = handle_client((ServerConfig *)&Config);
+            if (result != 0) {return EXIT_FAILURE;}
+        }
+}
 #endif
