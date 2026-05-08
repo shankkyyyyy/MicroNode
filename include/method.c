@@ -4,30 +4,53 @@
     #include <stdio.h>
     #include <stdlib.h>
     #include <string.h>
-
 #endif
 
-typedef struct {
-    char **users;
+char *MethodGet(char *path, char *users[], size_t num_users)
+{
+    // data = /users/nihal/josh
+    char *data = strtok(path, "/");
+    if (strcmp(data,"users") == 0)
+    {
+        data = strtok(NULL,"/");
+        if (data == NULL)
+            {
+                printf("UserName Not specified..\n");
+                return NULL;
+            }
 
-} DB;
+        while (data != NULL)
+        {
+            for (int i = 0; i < 5; i++)
+                {
+                    if (strcmp(data,users[i]) == 0)
+                    {
+                        printf("[%d--]: %s\n", i, data);
+                    }
+                }
+            data = strtok(NULL, "/");
 
-char *MethodGet(char *request)
+            printf("[00]: %s\n",data);
+        }
+        return NULL;
+    }
+    else
+    {
+        return NULL;
+    }
+}
+
+char *Method(char *request,char *users[],size_t num_users)
 {
     char *method = strtok(request," ");
     char *path = strtok(NULL, " ");
+    // must verify the http version.
     char *http_version = strtok(NULL, " ");
 
+    // cleaning the code
     if (strcmp(method,"GET") == 0)
     {
-        printf("METHOD GET\nFOUND\n\n");
-        char *data = strtok(path,"/");
-        while (data != NULL)
-        {
-            printf("%s\n", data);
-            data = strtok(NULL, "/");
-        }
-        return NULL;
+        return MethodGet(path, users, num_users);
     }
     else if (strcmp(method,"POST") == 0)
     {
@@ -38,9 +61,17 @@ char *MethodGet(char *request)
 
 int main()
 {
-    char request[] = "GET /users/nihal";
+    // debug code only !!
+   // User.UserNode_s = "users";
+    //User.data = "node";
+    // User.AllUsers = malloc(2 * (sizeof(char)));
+   // User.left = NULL;
+    //User.right = NULL;
+
+    char *all_users[] = {"nihal", "josh","john","foo","nihal","hehe"};
+    char request[] = "GET /users/nihal/hitty/josh";
     size_t len = strlen("GET /users/nihal ");
     printf("Len: %zu\n", len);
-    MethodGet(request);
+    Method(request,all_users);
     return 0;
 }

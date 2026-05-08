@@ -4,18 +4,13 @@
     #include <stdio.h>
     #include <stdlib.h>
     #include <string.h>
+
 #endif
 
-struct UserNode
-{
-     char *UserNode_s;
-     char *data;
-     struct UserNode *left;
-     struct UserNode *right;
-};
+typedef struct {
+    char **users;
 
-struct UserNode User;
-
+} DB;
 
 char *MethodGet(char *request)
 {
@@ -29,7 +24,6 @@ char *MethodGet(char *request)
         char *data = strtok(path,"/");
         while (data != NULL)
         {
-            if (strcmp(data,))
             printf("%s\n", data);
             data = strtok(NULL, "/");
         }
@@ -44,12 +38,6 @@ char *MethodGet(char *request)
 
 int main()
 {
-    // debug code only !!
-    User.UserNode_s = "users";
-    User.data = "node";
-    User.left = NULL;
-    User.right = NULL;
-
     char request[] = "GET /users/nihal";
     size_t len = strlen("GET /users/nihal ");
     printf("Len: %zu\n", len);
